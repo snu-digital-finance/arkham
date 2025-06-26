@@ -60,28 +60,12 @@ df_to = pd.DataFrame(result['to'])
 df = pd.concat([df_from, df_to], ignore_index=True).drop_duplicates().sort_values(
     by='address')
 
-df.loc[
-    ~df.arkhamEntity_type.isna(),
-    'arkhamLabel_name'
-] = df.loc[
-    ~df.arkhamEntity_type.isna(),
-    'arkhamEntity_name'
-] + ' ' + df.loc[
-    ~df.arkhamEntity_type.isna(),
-    'arkhamLabel_name'
-]
-
-
 df.loc[df.arkhamLabel_name.str.contains(
     'on OpenSea', na=False), 'arkhamLabel_name'] = 'OpenSea_User'
 df.loc[df.arkhamLabel_name == 'OpenSea User',
        'arkhamLabel_name'] = 'OpenSea_User'
 df.loc[df.arkhamLabel_name.str.contains(
     '.eth', na=False), 'arkhamLabel_name'] = 'ethName_User'
-
-for v in ['Router', 'Pool', 'Vault']:
-    df.loc[df.arkhamLabel_name.str.contains(v, na=False),
-           'arkhamLabel_name'] = f'_{v}'
 
 df.to_csv(
     f'addresses_{root_folder.split("/")[-1]}.csv', index=False, encoding='utf-8')

@@ -1,0 +1,14 @@
+*output*
+*.html
+*.csv
+
+# python
+__pycache__/
+*.py[cod]
+
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/

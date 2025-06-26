@@ -1,12 +1,15 @@
 from bs4 import BeautifulSoup
 import csv
 
-with open("funders.html", "r", encoding="utf-8") as f:
+
+filename = 'funders_de'
+
+with open(f"html/{filename}.html", "r", encoding="utf-8") as f:
     html = f.read()
 
 soup = BeautifulSoup(html, "html.parser")
 
-with open("output.csv", "w", newline="", encoding="utf-8") as csvfile:
+with open(f"output/output_{filename}.csv", "w", newline="", encoding="utf-8") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(["name", "balance", "tag", "url"])
 
